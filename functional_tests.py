@@ -5,9 +5,13 @@ import unittest
 class NewVisitorTest(unittest.TestCase):
 
     def setUp(self):
-        options = webdriver.FirefoxOptions()
+        options = webdriver.ChromeOptions()
         options.set_headless()
-        self.browser = webdriver.Firefox(options=options)
+        self.browser = webdriver.Chrome(options=options)
+
+        # options = webdriver.FirefoxOptions()
+        # options.set_headless()
+        # self.browser = webdriver.Firefox(options=options)
 
     def tearDown(self):
         self.browser.quit()
