@@ -1,26 +1,16 @@
 from selenium import webdriver
 import unittest
 
-from pyvirtualdisplay import Display
-
 
 class NewVisitorTest(unittest.TestCase):
 
     def setUp(self):
-        # start virtual display
-        self.vdisplay = Display(visible=0, size=(1024, 768))
-        self.vdisplay.start()
-
-        # start browser
-        self.browser = webdriver.Firefox()
-        self.browser.maximize_window()
+        options = webdriver.FirefoxOptions()
+        options.set_headless()
+        self.browser = webdriver.Firefox(options=options)
 
     def tearDown(self):
-        # stop browser
         self.browser.quit()
-
-        # stop display
-        self.vdisplay.stop()
 
     def test_can_start_a_list_and_retrieve_it_later(self):
         # Edith has heard about a cool new online to-do app. She goes
