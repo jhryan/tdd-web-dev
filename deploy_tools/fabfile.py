@@ -1,3 +1,5 @@
+import os
+
 from django.core.management.utils import get_random_secret_key
 from fabric.api import cd
 from fabric.api import env
@@ -42,6 +44,10 @@ def _create_or_update_dotenv():
     if 'DJANGO_SECRET_KEY' not in current_contents:
         new_secret = get_random_secret_key()
         append('.env', f"DJANGO_SECRET_KEY='{new_secret}'")
+    email = os.environ['EMAIL']
+    append('.env', f'EMAIL={email}')
+    email_password = os.environ['EMAIL_PASSWORD']
+    append('.env', f'EMAIL_PASSWORD={email_password}')
 
 
 def _update_static_files():
