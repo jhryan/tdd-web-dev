@@ -30,7 +30,6 @@ class LoginTest(FunctionalTest):
                 # get 10 newest messages
                 count, _ = inbox.stat()
                 for i in reversed(range(max(1, count - 10), count + 1)):
-                    print('getting msg', i)
                     _, lines, __ = inbox.retr(i)
                     lines = [l.decode('utf8') for l in lines]
                     if f'Subject: {subject}' in lines:
@@ -48,7 +47,8 @@ class LoginTest(FunctionalTest):
         # and notices a "Log in" section in the navbar for the first time
         # It's telling her to enter her email address, so she does
         if self.staging_server:
-            test_email = os.environ.get('EMAIL')
+            base_email = os.environ.get('EMAIL').split('@')[0]
+            test_email = base_email + '+testuser@gmail.com'
         else:
             test_email = 'edith@example.com'
 
